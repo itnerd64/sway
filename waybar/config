@@ -1,0 +1,71 @@
+{
+    "height": 32,
+    "spacing": 4,
+    
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["custom/clock"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "custom/internet", "tray"],
+
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d-%m-%Y}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}   {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/internet": {
+    "format": "Ethernet  ",
+    "exec": "curl icanhazip.com",
+    "interval": "once",
+    "format-alt": "{}  "
+    },
+    "custom/clock": {
+    "exec": "date +'%OI:%M %p       %dth %b %Y'",
+    "format-alt": "Archlinux",
+    "interval": 10
+    }
+}
