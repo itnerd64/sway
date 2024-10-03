@@ -1,0 +1,193 @@
+#### SWAYWM USER CONFIGURATION ####
+
+## VARIABLES ##
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty
+set $menu fuzzel
+
+
+## KEYBOARD SHORTCUTS ##
+# Kill Focused Window #
+bindsym $mod+Shift+q kill
+
+# Reload Sway Configuration #
+bindsym $mod+Shift+c reload
+
+# Exit Sway #
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Move Focus with VIM Key Bindings #
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move Focus with Classic Key Bindings #
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move Window with VIM Key Bindings #
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Move Window with Classic Key Bindings #
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Switch to workspace #
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move focused container to workspace #
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Split currently Focused Window #
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Toggle Fullscreen #
+bindsym $mod+f fullscreen
+
+# Floating Window Operations #
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+floating_modifier $mod normal
+
+# Scratchpad Operations #
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Launch Applications #
+bindsym $mod+t exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+shift+f exec fragments
+bindsym $mod+alt+k exec keepassxc
+bindsym $mod+alt+c exec corectrl
+bindsym $mod+c exec code
+bindsym $mod+x exec "thunar"
+
+# Change and Mute Volume #
+bindsym F12 exec "pamixer -u -i 5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"
+bindsym F11 exec "pamixer -d 5 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"
+bindsym F10 exec "pamixer -t && sleep 0.3 && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"
+
+# Launch Virtual Machines #
+bindsym $mod+m exec virsh --connect qemu:///system start manjaro && virt-viewer --connect=qemu:///system -f --auto-resize=always --attach manjaro
+bindsym $mod+w exec virsh --connect qemu:///system start win10 && virt-viewer --connect=qemu:///system -f --auto-resize=always --attach win10
+
+# Take Screenshots #
+bindsym Print exec grim -g "$(slurp)" - | swappy -f -
+
+# Toggle Lock Screen #
+bindsym $mod+Alt+l exec swaylock
+
+
+## INPUT DEVICES ##
+input "1133:16500:Logitech_G304" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+    accel_profile "flat"
+ }
+
+
+## WINDOW BORDERS ##
+default_border pixel 3
+client.focused "#9a7ad4" "#9a7ad4" "#9a7ad4"
+
+
+## WINDOW GAPS ##
+gaps inner 5
+gaps outer 2
+
+
+## FLOATING WINDOWS ##
+for_window [app_id="thunar"] floating enable, resize set 765 520
+for_window [app_id="Alacritty"] floating enable, resize set 800 530
+for_window [app_id="gedit"] floating enable, resize set 850 560
+for_window [app_id="de.haeckerfelix.Fragments"] floating enable, resize set 800 530
+for_window [app_id="pavucontrol"] floating enable, resize set 850 550
+for_window [app_id="io.github.celluloid_player.Celluloid"] floating enable, resize set 1010 675
+for_window [app_id="org.keepassxc.KeePassXC"] floating enable, resize set 745 496
+for_window [app_id="corectrl"] floating enable, resize set 800 530
+for_window [app_id="virt-manager"] floating enable, resize set 577 375
+for_window [app_id="file-roller"] floating enable
+
+
+## IDLE INHIBITOR ##
+for_window [app_id="chromium"] inhibit_idle fullscreen
+for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [app_id="io.github.celluloid_player.Celluloid"] inhibit_idle fullscreen
+
+
+## DISPLAY ##
+output HDMI-A-1 bg /home/$USER/.local/share/wallpapers/desktop.jpg fill
+output HDMI-A-2 bg /home/$USER/.local/share/wallpapers/desktop.jpg fill
+output HDMI-A-1 mode 1920x1080@75Hz position 1920,430 adaptive_sync on
+output HDMI-A-2 mode 1920x1080@75Hz position 3840,0 transform 270 adaptive_sync on
+
+
+## WAYBAR ##
+bar {
+     swaybar_command waybar
+}
+
+
+## GNOME THEMES ##
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+	gsettings set $gnome-schema gtk-theme 'Tokyonight-Dark-B'
+	gsettings set $gnome-schema icon-theme 'Papirus'
+	gsettings set $gnome-schema cursor-theme 'Win-8.1-S'
+	gsettings set $gnome-schema cursor-size '24'
+	gsettings set $gnome-schema font-name 'Ubuntu 11'
+}
+
+set $gedit-schema org.gnome.gedit.preferences.editor
+exec_always {
+     gsettings set $gedit-schema editor-font 'Monospace Regular 10'
+     gsettings set $gedit-schema scheme 'tokyonight-dark'
+}
+
+
+## XWAYLAND ##
+xwayland disable
+
+
+## SCREENLOCK AND IDLE ##
+exec swayidle -w \
+          timeout 600 'swaylock -f -c 000000' \
+          timeout 660 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          before-sleep 'swaylock -f -c 000000'
+
+include /etc/sway/config.d/*
+
+## EOF ##
